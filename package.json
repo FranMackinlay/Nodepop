@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./bin/www",
-    "dev": "cross-env DEBUG=nodepop:* NODE_ENV=production nodemon ./bin/www"
+    "dev": "cross-env DEBUG=nodepop:* NODE_ENV=production nodemon ./bin/www",
+    "db-init": "node db-init.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
