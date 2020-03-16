@@ -90,7 +90,7 @@ npm run dev
 
 **PUT: /api/ads/:id**
 
-To update an Ad, provide the id od the Ad to be modified and send the payload in the body to me modified:
+To update an Ad, provide the id of the Ad to be modified and send the payload in the body to me modified:
 
 - Original parameter: 
 
