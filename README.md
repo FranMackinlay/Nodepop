@@ -66,7 +66,5 @@ npm run dev
 
 **Available filters**
 
-```shell
-/api/ads? **adName=Fooba** & **price=200-1000** & **tags=motor-lifestyle**
-```
+- /api/ads?**adName=Fooba**&**price=200-1000**&**tags=motor-lifestyle**
 
