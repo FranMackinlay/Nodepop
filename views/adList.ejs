@@ -1,0 +1,38 @@
+<style>
+  body {
+    background-color: black;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    list-style-type: none;
+  }
+
+  li {
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+  }
+
+  img {
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+  }
+</style>
+<ul>
+  <% adList.forEach(ad => { %>
+
+  <li style="display: flex;">
+    <img src="<%= `${ad.photo}` %> " alt="">
+    <p><%= `U$D ${ad.price}` %></p>
+    <p><%= `${ad.adName}` %></p>
+  </li>
+  <% }) %>
+</ul>
