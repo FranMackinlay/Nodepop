@@ -68,7 +68,8 @@ npm run dev
 
 - /api/ads?**adName=Fooba**
 - /api/ads?**price=200-1000**
-- /api/ads?**tags=motor-lifestyle**
-- /api/ads?*sale=true*
+- /api/ads?**tags=motor-lifestyle-mobile-work**
+- /api/ads?**sale=true**
 
+ > All combined: - /api/ads?*adName=Fooba*&*price=200-1000*&*tags=motor-lifestyle-mobile-work*&*sale=true*
 
