@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const adSchema = mongoose.Schema({
   adName: String,
   sale: Boolean,
-  price: [String],
+  price: Number,
   photo: String,
   tags: [String]
 });
