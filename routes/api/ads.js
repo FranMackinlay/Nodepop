@@ -7,27 +7,34 @@ const Ad = require('../../models/Ad');
 
 router.get('/', async (req, res, next) => {
   try {
-    const adName = new RegExp('^' + req.query.adName, "i");
+    const filter = {};
+
+    if (req.query.adName !== undefined) {
+      const adName = new RegExp('^' + req.query.adName, "i");
+      filter.adName = adName;
+    }
+
     const sale = req.query.sale;
-    let price = req.query.price;
+    const price = req.query.price;
     const tags = req.query.tags;
     const limit = parseInt(req.query.limit) || 10000;
     const skip = parseInt(req.query.skip);
     const sort = req.query.sort;
 
-    const filter = {};
 
-    if (typeof adName !== 'undefined' && adName === new RegExp('^' + req.query.adName, "i")) {
-      filter.adName = adName;
-    }
+
     if (typeof sale !== 'undefined') {
       filter.sale = sale;
     }
     if (typeof price !== 'undefined') {
       if (price.includes('-')) {
+
         const priceRange = price.split('-');
 
-        filter.price = { '$gte': priceRange[0], '$lte': priceRange[1] };
+        filter.price = { $gte: parseInt(priceRange[0]), $lte: parseInt(priceRange[1]) };
+
+      } else {
+        filter.price = price;
       }
     }
 
@@ -35,14 +42,17 @@ router.get('/', async (req, res, next) => {
       filter.tags = tags;
     }
 
+    console.log(filter);
     const adList = await Ad.list(filter, limit, skip, sort, tags);
-    console.log(adList);
+    res.locals.adList = adList;
 
     if (adList.length === 0) {
       res.status(404).json({ error: 'Ad not found, try with another query' });
+    } else {
+      res.render('adList', adList);
     }
 
-    res.json(adList);
+
   } catch (err) {
     next(err);
   }

@@ -5,13 +5,12 @@ const mongoose = require('mongoose');
 const adSchema = mongoose.Schema({
   adName: String,
   sale: Boolean,
-  price: String,
+  price: [String],
   photo: String,
   tags: [String]
 });
 
 adSchema.statics.list = function (filter, limit, skip, sort) {
-  console.log(filter);
 
   const query = Ad.find(filter).limit(limit).skip(skip).sort(sort);
   return query.exec();
