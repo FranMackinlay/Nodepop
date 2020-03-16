@@ -71,5 +71,45 @@ npm run dev
 - /api/ads?**tags=motor-lifestyle-mobile-work**
 - /api/ads?**sale=true**
 
- > All combined: - /api/ads?*adName=Fooba*&*price=200-1000*&*tags=motor-lifestyle-mobile-work*&*sale=true*
+    > All combined: - /api/ads?*adName=Fooba*&*price=200-1000*&*tags=motor-lifestyle-mobile-work*&*sale=true*
+
+
+**POST: /api/ads**
+
+- Payload required in body:
+ 
+ ```shell
+{
+  adName: String,
+  sale: Boolean,
+  price: Number,
+  photo: String,
+  tags: [String]
+}
+ ```
+
+**PUT: /api/ads/:id**
+
+To update an Ad, send the payload in the body to me modified:
+
+- Original parameter: 
+
+```shell
+{
+  price: 3000,
+}
+```
+- New parameter: 
+
+```shell
+{
+  price: 1000,
+}
+```
+
+**DELETE: /api/ads/:id**
+
+To delete an Ad provide the id parameter in URL.
+
+
 
