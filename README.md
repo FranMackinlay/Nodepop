@@ -2,6 +2,8 @@
 
 Nodepop is an ads API (work in progress).
 
+> Suggestion: for VsCode users, you can download Better Comments extension for visualizing better the comments.
+
 
 ### Install dependencies
 

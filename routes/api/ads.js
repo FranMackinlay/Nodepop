@@ -1,3 +1,4 @@
+/* eslint-disable no-trailing-spaces */
 /* eslint-disable radix */
 /* eslint-disable no-underscore-dangle */
 
@@ -56,14 +57,22 @@ router.get('/', async (req, res, next) => {
       }
     }
 
-    const { sale } = req.query;
+    //* Validate sale filter
+    const isSale = req.query.sale;
+    switch (isSale) {
+      case 'buy':
+        filter.sale = true;
+        break;
+      case 'sell':
+        filter.sale = false;
+        break;
+      default:
+        break;
+    }
+
     const limit = parseInt(req.query.limit) || 10000;
     const skip = parseInt(req.query.skip);
     const { sort } = req.query;
-
-    if (typeof sale !== 'undefined') {
-      filter.sale = sale;
-    }
 
     const adList = await Ad.list(filter, limit, skip, sort);
 
@@ -73,6 +82,7 @@ router.get('/', async (req, res, next) => {
       res.status(404).json({ error: 'Ad not found, try with another query' });
     } else {
       res.json(adList);
+      // res.render('adList', adList);
     }
   } catch (err) {
     next(err);
