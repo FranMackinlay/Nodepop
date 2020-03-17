@@ -79,6 +79,15 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/tags', async (req, res, next) => {
+  try {
+    const tagsArray = await Ad.getTags();
+    res.json(tagsArray);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/:id', async (req, res, next) => {
   try {
     const _id = req.params.id;

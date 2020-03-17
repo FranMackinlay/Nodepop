@@ -16,6 +16,13 @@ adSchema.statics.list = function (filter, limit, skip, sort) {
   return query.exec();
 };
 
+// eslint-disable-next-line func-names
+adSchema.statics.getTags = function () {
+  // eslint-disable-next-line no-use-before-define
+  const tags = Ad.distinct('tags');
+  return tags.exec();
+};
+
 const Ad = mongoose.model('Ad', adSchema);
 
 

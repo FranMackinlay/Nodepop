@@ -64,6 +64,21 @@ npm run dev
 ]
 ```
 
+**GET: /api/ads/tags**
+
+- Retrieve an array with all known tags from ads collection
+
+- Result:
+
+```shell
+[
+  "lifestyle",
+  "mobile",
+  "motor",
+  "work"
+]
+```
+
 **Available filters**
 
 - /api/ads?**adName=Fooba**
