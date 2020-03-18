@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+
 const app = express();
 
 require('./lib/connectMongoose');
@@ -19,6 +20,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/ads', require('./routes/api/ads'));
+
+app.use('/', require('./routes/index'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

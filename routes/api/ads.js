@@ -84,6 +84,7 @@ router.get('/', async (req, res, next) => {
       res.json(adList);
       // res.render('adList', adList);
     }
+    module.exports = adList;
   } catch (err) {
     next(err);
   }
