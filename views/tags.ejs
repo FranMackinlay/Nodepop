@@ -1,0 +1,41 @@
+<style>
+  body {
+    background-color: black;
+  }
+
+  .tags-container {
+    background-color: lightgray;
+    width: 200px;
+    padding: 20px;
+    border-radius: 20px;
+    height: 200px;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  li {
+    margin: 10px;
+  }
+
+  li:hover {
+    background-color: gray;
+    width: 70px;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 5px;
+    color: whitesmoke;
+  }
+</style>
+<div class="tags-container">
+  <h2>Tags available: </h2>
+  <ul>
+    <% tagsArray.forEach(tag => { %>
+
+    <li>
+      <%= `${tag}` %>
+    </li>
+    <% }) %>
+  </ul>
+</div>
