@@ -5,13 +5,13 @@ Nodepop is an ads API (work in progress).
 > Suggestion: for VsCode users, you can download Better Comments extension for visualizing better the comments.
 
 
-### Install dependencies
+### Install dependencies:
 
 ```shell
 npm install
 ```
 
-### Start a mongoDB instance
+### Start a mongoDB instance:
 
 ```shell
 <root-mongodb-folder>$ ./bin/mongod --dbpath ./data/db --directoryperdb
@@ -22,13 +22,13 @@ npm install
 npm run db-init
 ```
 
-### To start the api in dev mode
+### To start the api in dev mode:
 
 ```shell
 npm run dev
 ```
 
-### API Endopints
+### API Endopints:
 
 **GET: /api/ads**
 
@@ -145,7 +145,7 @@ To update an Ad, provide the id of the Ad to be modified and send the payload in
 
 To delete an Ad provide the id parameter in URL.
 
-### Frontend pages
+### Frontend pages:
 
 **"/"** 
 
@@ -156,7 +156,7 @@ Shows the complete ads list.
 Shows the existing tags in all ads.
 
 
-### Frontend filters
+### Frontend filters:
 
 **Available filters:**
 
