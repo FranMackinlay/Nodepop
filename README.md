@@ -92,9 +92,9 @@ npm run dev
 - /api/ads?**price=200-**
   > price es equal or greater than 200
 - /api/ads?**price=-1000**
- > price es equal or lower than 1000
+  > price es equal or lower than 1000
 - /api/ads?**tags=motor-lifestyle-mobile-work**
- > tags splitted by "-".
+  > tags splitted by "-".
 - /api/ads?**sale=true**
   > or false.
 - /api/ads?**limit=2**
