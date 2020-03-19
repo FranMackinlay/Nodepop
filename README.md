@@ -102,7 +102,10 @@ npm run dev
 - /api/ads?**sort=price**
   > Sort ads by price (lower to greater). With the option "-price" (greater to lower).
 
-    > All combined: - /api/ads?*adName=Fooba*&*price=200-1000*&*tags=motor-lifestyle-mobile-work*&*sale=true*
+- All combined:
+  ```shell
+   /api/ads?*adName=Fooba*&*price=200-1000*&*tags=motor-lifestyle-mobile-work*&*sale=true*
+   ```
 
 
 **POST: /api/ads**
