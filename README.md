@@ -147,11 +147,11 @@ To delete an Ad provide the id parameter in URL.
 
 ### Frontend pages:
 
-**"/"** 
+- **"/"** 
 
 Shows the complete ads list.
 
-**"/tags"**
+- **"/tags"**
 
 Shows the existing tags in all ads.
 
@@ -162,8 +162,24 @@ Shows the existing tags in all ads.
 
 - /?**adName=Fooba**
   > Starting word, non case-sensitive.
+- /?**price=200**
+  > price is equal to 200
 - /?**price=200-1000**
+  > price range between 200 to 1000.
+- /?**price=200-**
+  > price es equal or greater than 200
+- /?**price=-1000**
+  > price es equal or lower than 1000
 - /?**tags=motor-lifestyle-mobile-work**
+  > tags splitted by "-".
 - /?**sale=true**
+  > or false.
+- /?**limit=2**
+  > limit the results into 2
+- /?**sort=price**
+  > sort ads by price (lower to greater). With the option "-price" (greater to lower).
 
-    > All combined: - /?*adName=Fooba*&*price=200-1000*&*tags=motor-lifestyle-mobile-work*&*sale=true*
+- All combined:
+  ```shell
+   /?adName=Fooba&price=200-1000&tags=motor-lifestyle-mobile-work&sale=true
+   ```
