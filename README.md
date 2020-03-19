@@ -104,7 +104,7 @@ npm run dev
 
 - All combined:
   ```shell
-   /api/ads?*adName=Fooba*&*price=200-1000*&*tags=motor-lifestyle-mobile-work*&*sale=true*
+   /api/ads?adName=Fooba&price=200-1000&tags=motor-lifestyle-mobile-work&sale=true
    ```
 
 
