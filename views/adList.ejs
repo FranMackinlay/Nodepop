@@ -19,6 +19,14 @@
     border-radius: 10px;
     text-align: center;
     align-items: center;
+    height: 350px;
+  }
+
+  li:hover {
+    background-color: gray;
+    color: whitesmoke;
+    font-size: 20px;
+    border-radius: 10px;
   }
 
   img {
@@ -31,10 +39,10 @@
 <ul>
   <% adList.forEach(ad => { %>
 
-  <li style="display: flex;">
+  <li>
     <img src="<%= `${ad.photo}` %> " alt="">
     <p><%= `U$D ${ad.price}` %></p>
-    <p><%= `${ad.adName}` %></p>
+    <h3><%= `${ad.adName}` %></h3>
   </li>
   <% }) %>
 </ul>
