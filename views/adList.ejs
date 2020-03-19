@@ -36,15 +36,32 @@
     height: 200px;
     border-radius: inherit;
   }
+
+  .price {
+    margin: 10px;
+  }
+
+  .ad-name {
+    margin: 0;
+  }
+
+  .tags-title {
+    margin: 10px;
+  }
+
+  .tags {
+    margin: 10px;
+  }
 </style>
 
 <ul>
   <% adList.forEach(ad => { %>
-
   <li>
     <img src="<%= `${ad.photo}` %> " alt="">
-    <p><%= `U$D ${ad.price}` %></p>
-    <h3><%= `${ad.adName}` %></h3>
+    <p class="price"><%= `U$D ${ad.price}` %></p cl>
+    <h3 class="ad-name"><%= `${ad.adName}` %></h3>
+    <h5 class="tags-title">Tags:</h5>
+    <p class="tags"><%= `${ad.tags}` %></p>
   </li>
   <% }) %>
 </ul>
