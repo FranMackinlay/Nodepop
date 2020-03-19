@@ -84,9 +84,23 @@ npm run dev
 **Available filters**
 
 - /api/ads?**adName=Fooba**
+  > Starting word, non case-sensitive.
+- /api/ads?**price=200**
+  > price is equal to 200
 - /api/ads?**price=200-1000**
+  > Price range between 200 to 1000.
+- /api/ads?**price=200-**
+  > Price es equal or greater than 200
+- /api/ads?**price=-1000**
+ > Price es equal or lower than 1000
 - /api/ads?**tags=motor-lifestyle-mobile-work**
+ > tags splitted by "-".
 - /api/ads?**sale=true**
+  > or false.
+- /api/ads?**limit=2**
+  > Limit the results into 2
+- /api/ads?**sort=price**
+  > Sort ads by price (lower to greater). With the option "-price" (greater to lower).
 
     > All combined: - /api/ads?*adName=Fooba*&*price=200-1000*&*tags=motor-lifestyle-mobile-work*&*sale=true*
 
@@ -128,5 +142,25 @@ To update an Ad, provide the id of the Ad to be modified and send the payload in
 
 To delete an Ad provide the id parameter in URL.
 
+### Frontend pages
+
+**"/"** 
+
+Shows the complete ads list.
+
+**"/tags"**
+
+Shows the existing tags in all ads.
 
 
+### Frontend filters
+
+**Available filters:**
+
+- /?**adName=Fooba**
+  > Starting word, non case-sensitive.
+- /?**price=200-1000**
+- /?**tags=motor-lifestyle-mobile-work**
+- /?**sale=true**
+
+    > All combined: - /?*adName=Fooba*&*price=200-1000*&*tags=motor-lifestyle-mobile-work*&*sale=true*
