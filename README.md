@@ -95,8 +95,8 @@ npm run dev
   > price es equal or lower than 1000
 - /api/ads?**tags=motor-lifestyle-mobile-work**
   > tags splitted by "-".
-- /api/ads?**sale=true**
-  > or false.
+- /api/ads?**sale=buy**
+  > or sell.
 - /api/ads?**limit=2**
   > limit the results into 2
 - /api/ads?**sort=price**
@@ -104,7 +104,7 @@ npm run dev
 
 - All combined:
   ```shell
-   /api/ads?adName=Fooba&price=200-1000&tags=motor-lifestyle-mobile-work&sale=true
+   /api/ads?adName=Fooba&price=200-1000&tags=motor-lifestyle-mobile-work&sale=buy
    ```
 
 
@@ -172,8 +172,8 @@ Shows the existing tags in all ads.
   > price es equal or lower than 1000
 - /?**tags=motor-lifestyle-mobile-work**
   > tags splitted by "-".
-- /?**sale=true**
-  > or false.
+- /?**sale=buy**
+  > or sell.
 - /?**limit=2**
   > limit the results into 2
 - /?**sort=price**
@@ -181,5 +181,5 @@ Shows the existing tags in all ads.
 
 - All combined:
   ```shell
-   /?adName=Fooba&price=200-1000&tags=motor-lifestyle-mobile-work&sale=true
+   /?adName=Fooba&price=200-1000&tags=motor-lifestyle-mobile-work&sale=buy
    ```
