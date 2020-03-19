@@ -88,19 +88,19 @@ npm run dev
 - /api/ads?**price=200**
   > price is equal to 200
 - /api/ads?**price=200-1000**
-  > Price range between 200 to 1000.
+  > price range between 200 to 1000.
 - /api/ads?**price=200-**
-  > Price es equal or greater than 200
+  > price es equal or greater than 200
 - /api/ads?**price=-1000**
- > Price es equal or lower than 1000
+ > price es equal or lower than 1000
 - /api/ads?**tags=motor-lifestyle-mobile-work**
  > tags splitted by "-".
 - /api/ads?**sale=true**
   > or false.
 - /api/ads?**limit=2**
-  > Limit the results into 2
+  > limit the results into 2
 - /api/ads?**sort=price**
-  > Sort ads by price (lower to greater). With the option "-price" (greater to lower).
+  > sort ads by price (lower to greater). With the option "-price" (greater to lower).
 
 - All combined:
   ```shell
