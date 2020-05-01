@@ -21,7 +21,7 @@ const initAds = async () => {
       adName: "HoverBike",
       sale: true,
       price: 230,
-      photo: "https://megaricos.com/wp-content/uploads/2018/10/Hoversurf-Hoverbike-1.jpg",
+      photo: "https://cdn.shortpixel.ai/spai/w_1003+h_617+q_lossless+ret_img+to_webp/https://megaricos.com/wp-content/uploads/2018/10/Hoversurf_4.jpg",
       tags: ["lifestyle", "motor"]
     },
     {
