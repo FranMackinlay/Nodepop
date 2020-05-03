@@ -85,7 +85,6 @@ router.get('/', async (req, res, next) => {
       res.render('error');
     } else {
       res.render('adList', adList);
-      // res.render('adList', adList);
     }
   } catch (err) {
     next(err);
