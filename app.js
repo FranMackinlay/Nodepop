@@ -19,10 +19,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api/ads', require('./routes/api/ads'));
+const jwtAuth = require('./lib/jwtAuth');
+
+app.use('/api/ads', jwtAuth(), require('./routes/api/ads'));
 
 app.use('/', require('./routes/index'));
 app.use('/tags', require('./routes/tags'));
+app.use('/api/authenticate', require('./routes/api/authenticate'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -30,7 +33,8 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res) => {
+app.use(function (err, req, res) {
+  console.log('Here in error handler');
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
