@@ -28,16 +28,23 @@ app.use('/tags', require('./routes/tags'));
 app.use('/api/authenticate', require('./routes/api/authenticate'));
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
+const isApiRequest = req => {
+  return req.originalUrl.startsWith('/api/');
+};
+
 // error handler
-app.use(function (err, req, res) {
-  console.log('Here in error handler');
+app.use(function (err, req, res, next) {
+  if (isApiRequest(req)) {
+    return res.json({ status: err.status, message: err.message });
+  }
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.status = err.status;
+  res.locals.errors = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
