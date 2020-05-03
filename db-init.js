@@ -3,13 +3,15 @@
 const connection = require('./lib/connectMongoose');
 
 const Ad = require('./models/Ad');
+const User = require('./models/User');
 
 connection.once('open', async () => {
   try {
     await initAds();
+    await initUsers();
     connection.close();
   } catch (err) {
-    console.err('An error happend:', err);
+    console.error('An error happend:', err);
     process.exit(1);
   }
 });
@@ -52,5 +54,19 @@ const initAds = async () => {
       photo: "https://www.3dizingof.com/wp-content/uploads/2019/09/nasa-blackhole.gif",
       tags: ["lifestyle"]
     }
+  ]);
+};
+
+const initUsers = async () => {
+  await User.deleteMany();
+  await User.insertMany([
+    {
+      email: 'user@example.es',
+      password: await User.hashPassword('1234'),
+    },
+    {
+      email: 'example@gmail.com',
+      password: await User.hashPassword('12345'),
+    },
   ]);
 };
