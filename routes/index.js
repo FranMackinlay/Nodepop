@@ -79,7 +79,7 @@ router.get('/', async (req, res, next) => {
     if (adList.length === 0) {
       res.locals.errors = {
         status: res.status(404).statusCode,
-        msg: 'Oh no! Ad not found!',
+        message: 'Oh no! Ad not found!',
         solution: 'Please try another query.',
       };
       res.render('error');
