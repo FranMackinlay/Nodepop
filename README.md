@@ -4,7 +4,6 @@ Nodepop is an ads API (work in progress).
 
 > Suggestion: for VsCode users, you can download Better Comments extension for visualizing better the comments.
 
-
 ### Install dependencies:
 
 ```shell
@@ -18,6 +17,7 @@ npm install
 ```
 
 ### To initialize database you can run:
+
 ```shell
 npm run db-init
 ```
@@ -28,11 +28,32 @@ npm run db-init
 npm run dev
 ```
 
+### Authentication:
+
+To get access to all API features, you must get the authentication token.
+
+**POST: /api/authenticate**
+
+> Use the credentials in db-init.js
+
+Payload required:
+
+```shell
+{
+  email: <yourEmailHere>,
+  password: <yourPasswordHere>,
+}
+```
+
+> You will recieve a JWT Token.
+
 ### API Endopints:
+
+#### NOTE: To get the results you need to send the Token via body or query-string.
 
 **GET: /api/ads**
 
-  > GET is limited by default to 1.000 results 
+> GET is limited by default to 1.000 results
 
 - Result:
 
@@ -48,6 +69,7 @@ npm run dev
     "sale": true,
     "price": 230,
     "photo": "https://megaricos.com/wp-content/uploads/2018/10/Hoversurf-Hoverbike-1.jpg",
+    "thumbnail": "__dirname/thumbnails/name-thumbnail.jpg
     "__v": 0
   },
   {
@@ -61,6 +83,7 @@ npm run dev
     "sale": true,
     "price": 1500,
     "photo": "https://i.pinimg.com/originals/e4/01/c7/e401c730dfdd8187340198d4a9b39b92.jpg",
+    "thumbnail": "__dirname/thumbnails/name-thumbnail.jpg
     "__v": 0
   },
 ]
@@ -100,40 +123,42 @@ npm run dev
 - /api/ads?**limit=2**
   > limit the results into 2
 - /api/ads?**sort=price**
+
   > sort ads by price (lower to greater). With the option "-price" (greater to lower).
 
 - All combined:
   ```shell
    /api/ads?adName=Fooba&price=200-1000&tags=motor-lifestyle-mobile-work&sale=buy
-   ```
-
+  ```
 
 **POST: /api/ads**
 
 - Payload required in body:
- 
- ```shell
+
+```shell
 {
-  adName: String,
-  sale: Boolean,
-  price: Number,
-  photo: String,
-  tags: [String]
+ adName: String,
+ sale: Boolean,
+ price: Number,
+ photo: String,
+ tags: [String],
+ thumbnail: String,
 }
- ```
+```
 
 **PUT: /api/ads/:id**
 
 To update an Ad, provide the id of the Ad to be modified and send the payload in the body to be modified:
 
-- Original parameter: 
+- Original parameter:
 
 ```shell
 {
   price: 3000,
 }
 ```
-- New parameter: 
+
+- New parameter:
 
 ```shell
 {
@@ -147,14 +172,13 @@ To delete an Ad provide the id parameter in URL.
 
 ### Frontend pages:
 
-- **"/"** 
+- **"/"**
 
 Shows the complete ads list.
 
 - **"/tags"**
 
 Shows the existing tags in all ads.
-
 
 ### Frontend filters:
 
@@ -177,9 +201,10 @@ Shows the existing tags in all ads.
 - /?**limit=2**
   > limit the results into 2
 - /?**sort=price**
+
   > sort ads by price (lower to greater). With the option "-price" (greater to lower).
 
 - All combined:
   ```shell
    /?adName=Fooba&price=200-1000&tags=motor-lifestyle-mobile-work&sale=buy
-   ```
+  ```
