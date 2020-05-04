@@ -8,10 +8,22 @@ var app = require('../app');
 var debug = require('debug')('nodepop:server');
 var http = require('http');
 
+const responder = require('../routes/api/createThumbnailService');
+const jimp = require('jimp');
+
+responder.on('create-thumbnail', (req, done) => {
+  console.log('creating thumbnail');
+  const thumbnailName = `${req.adName}-thumbnail.jpg`
+  jimp.read(req.what, (err, photo) => {
+    if (err) throw next(err);
+    photo.resize(100, 100).quality(60).write(`${__dirname}/thumbnails/${thumbnailName}`);
+  });
+  done(`${__dirname}/thumbnails/${thumbnailName}`);
+})
+
 /**
  * Get port from environment and store in Express.
  */
-
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
