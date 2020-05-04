@@ -37,6 +37,7 @@ app.use('/api/ads', jwtAuth(), require('./routes/api/ads'));
 app.use('/', require('./routes/index'));
 app.use('/tags', require('./routes/tags'));
 app.use('/api/authenticate', require('./routes/api/authenticate'));
+app.use('/change-locale', require('./routes/change-locale'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
