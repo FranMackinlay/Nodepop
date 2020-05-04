@@ -145,7 +145,7 @@ router.post('/', async (req, res, next) => {
     }
   });
 
-  res.status(201).json({ result: 'Ad created successfully' });
+  res.status(201).json({ result: 'Ad created successfully', status: 201 });
 });
 
 router.put('/:id', async (req, res, next) => {
