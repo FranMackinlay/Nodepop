@@ -7,8 +7,8 @@ const router = express.Router();
 const Ad = require('../../models/Ad');
 const cote = require('cote');
 const requester = new cote.Requester({ name: 'create thumbnail' });
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
+const jimp = require('jimp');
+
 
 
 router.get('/', async (req, res, next) => {
@@ -118,23 +118,31 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/', upload.single('thumbnail'), async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   const adData = req.body;
-  console.log(adData);
   const image = req.file;
+
   const thumbnailName = `${req.body.adName}-thumbnail.jpg`
+  const thumbnailRoute = `${__dirname}/thumbnails/${thumbnailName}`;
+
+  jimp.read(image.path, (err, photo) => {
+    if (err) throw err;
+    photo.resize(100, 100).quality(60).write(thumbnailRoute);
+  });
 
   requester.send({
-    type: 'create-thumbnail',
-    what: image,
-    adName: req.body.adName,
-    width: 100,
-    height: 100,
+    type: 'save-thumbnail',
+    itemToSave: thumbnailRoute,
   }, async result => {
-    console.log(result);
-    req.body.thumbnail = result;
-    const newAd = new Ad(adData);
-    await newAd.save();
+    try {
+      console.log(result);
+      adData.thumbnail = result;
+      const newAd = new Ad(adData);
+      await newAd.save();
+
+    } catch (error) {
+      next(error);
+    }
   });
 
   res.status(201).json({ result: 'Ad created successfully' });
