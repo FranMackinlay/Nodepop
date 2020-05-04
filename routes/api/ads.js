@@ -8,6 +8,10 @@ const router = express.Router();
 
 const Ad = require('../../models/Ad');
 
+const jimp = require('jimp');
+
+
+
 router.get('/', async (req, res, next) => {
   try {
     const filter = {};
@@ -115,8 +119,17 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
   const adData = req.body;
+  const image = req.body.photo;
+  const thumbnailName = `${req.body.adName}-thumbnail.jpg`
+
+  jimp.read(image, (err, photo) => {
+    if (err) throw next(err);
+    photo.resize(100, 100).quality(60).write(`${__dirname}/thumbnails/${thumbnailName}`);
+  });
+
+  req.body.thumbnail = `${__dirname}/thumbnails/${thumbnailName}`;
 
   const newAd = new Ad(adData);
 

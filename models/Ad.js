@@ -7,6 +7,7 @@ const adSchema = mongoose.Schema({
   price: Number,
   photo: String,
   tags: [String],
+  thumbnail: String,
 });
 
 // eslint-disable-next-line func-names
