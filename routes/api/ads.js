@@ -3,13 +3,12 @@
 /* eslint-disable no-underscore-dangle */
 
 const express = require('express');
-
 const router = express.Router();
-
 const Ad = require('../../models/Ad');
-
-const jimp = require('jimp');
-
+const cote = require('cote');
+const requester = new cote.Requester({ name: 'create thumbnail' });
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 
 router.get('/', async (req, res, next) => {
@@ -119,21 +118,24 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', upload.single('thumbnail'), async (req, res, next) => {
   const adData = req.body;
-  const image = req.body.photo;
+  console.log(adData);
+  const image = req.file;
   const thumbnailName = `${req.body.adName}-thumbnail.jpg`
 
-  jimp.read(image, (err, photo) => {
-    if (err) throw next(err);
-    photo.resize(100, 100).quality(60).write(`${__dirname}/thumbnails/${thumbnailName}`);
+  requester.send({
+    type: 'create-thumbnail',
+    what: image,
+    adName: req.body.adName,
+    width: 100,
+    height: 100,
+  }, async result => {
+    console.log(result);
+    req.body.thumbnail = result;
+    const newAd = new Ad(adData);
+    await newAd.save();
   });
-
-  req.body.thumbnail = `${__dirname}/thumbnails/${thumbnailName}`;
-
-  const newAd = new Ad(adData);
-
-  await newAd.save();
 
   res.status(201).json({ result: 'Ad created successfully' });
 });
