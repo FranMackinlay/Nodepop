@@ -1,6 +1,13 @@
 <style>
   body {
     background-color: black;
+    font-family: sans-serif;
+  }
+
+  h1 {
+    color: white;
+    text-align: center;
+    margin-top: 50px;
   }
 
   ul {
@@ -54,11 +61,16 @@
   }
 </style>
 
+<% getLocales().forEach(locale => { %>
+  <a href="/change-locale/<%= locale %>"><%= locale %></a>&nbsp;
+<% }); %>
+
+<h1>__('Welcome to') <%= title %></h1>
 <ul>
   <% adList.forEach(ad => { %>
   <li>
     <img src="<%= `${ad.photo}` %> " alt="">
-    <p class="price"><%= `U$D ${ad.price}` %></p cl>
+    <p class="price"><%= `Price: U$D ${ad.price}` %></p cl>
     <h3 class="ad-name"><%= `${ad.adName}` %></h3>
     <h5 class="tags-title">Tags:</h5>
     <p class="tags"><%= `${ad.tags}` %></p>
