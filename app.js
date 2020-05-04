@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 const app = express();
 
@@ -31,7 +33,7 @@ app.locals.title = 'Nodepop';
 
 const jwtAuth = require('./lib/jwtAuth');
 
-app.use('/api/ads', jwtAuth(), require('./routes/api/ads'));
+app.use('/api/ads', upload.single('thumbnail'), jwtAuth(), require('./routes/api/ads'));
 
 app.use('/', require('./routes/index'));
 app.use('/tags', require('./routes/tags'));
