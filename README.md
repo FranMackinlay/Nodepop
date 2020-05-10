@@ -146,7 +146,7 @@ Payload required:
  price: Number,
  photo: String,
  tags: [String],
- thumbnail: String,
+ thumbnail: String, (or via Postman, in form-data body request as a type file)
 }
 ```
 
