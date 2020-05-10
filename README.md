@@ -16,6 +16,10 @@ npm install
 <root-mongodb-folder>$ ./bin/mongod --dbpath ./data/db --directoryperdb
 ```
 
+### Enviroment variables
+
+> Look at the .env.example to know how to declare the necessary .env variables and create a .env file
+
 ### To initialize database you can run:
 
 ```shell
