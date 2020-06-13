@@ -4,11 +4,11 @@ Nodepop is an ads API (work in progress).
 
 You could see how it looks like by clicking the following link:
 
-http://ec2-3-19-218-251.us-east-2.compute.amazonaws.com/
+<a href="http://ec2-3-19-218-251.us-east-2.compute.amazonaws.com/" target="_blank">Nodepop Frontend</a>
 
 ## Only for @Kas
 
-http://3.19.218.251/
+<a href="http://3.19.218.251/" target="_blank">ReactAds</a>
 
 > Suggestion: for VsCode users, you can download Better Comments extension for visualizing better the comments.
 
