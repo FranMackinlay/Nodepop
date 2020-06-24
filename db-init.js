@@ -68,5 +68,10 @@ const initUsers = async () => {
       email: 'example@gmail.com',
       password: await User.hashPassword('12345'),
     },
+    {
+      email: 'franmackinlay@gmail.com',
+      password: await User.hashPassword('12345678'),
+    },
+
   ]);
 };
