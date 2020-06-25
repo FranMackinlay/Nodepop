@@ -84,7 +84,7 @@ router.get('/', async (req, res, next) => {
     if (adList.length === 0) {
       res.status(404).json({ error: 'Ad not found, try with another query' });
     } else {
-      res.json(adList);
+      res.json({ results: adList });
       // res.render('adList', adList);
     }
     module.exports = adList;
