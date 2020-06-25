@@ -23,6 +23,10 @@ router.post('/', async (req, res, next) => {
       expiresIn: '3d',
     });
 
+    res.header('Access-Control-Allow-Origin', '*');
+
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
     res.json({ token });
 
   } catch (error) {
