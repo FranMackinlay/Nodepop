@@ -14,7 +14,7 @@ router.post('/', async (req, res, next) => {
     const findUser = await User.findOne({ email });
 
     if (!findUser || !await bcrypt.compare(password, findUser.password)) {
-      const error = new Error('Invalid Credentials');
+      const error = new Error({ error: true, message: 'Invalid Credentials' });
       error.status = 401;
       return next(error);
     }
