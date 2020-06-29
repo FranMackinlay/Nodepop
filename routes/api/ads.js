@@ -119,6 +119,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
+  console.log(req.body);
   const adData = req.body;
   const image = req.file;
   const adName = req.body.adName || req.body.name;
