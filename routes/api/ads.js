@@ -121,13 +121,13 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   const adData = req.body;
   const image = req.file;
-  const adName = req.body.adName;
-  console.log(typeof adName);
+  const adName = req.body.adName || req.body.name;
+
 
   const thumbnailName = `${adName.replace(/ /g, '').replace(/'/g, '')}-thumbnail.jpg`
   const thumbnailRoute = `${__dirname}/thumbnails/${thumbnailName}`;
 
-  jimp.read(image.path, (err, photo) => {
+  jimp.read(image?.path, (err, photo) => {
     if (err) throw err;
     photo.resize(100, 100).quality(60).write(thumbnailRoute);
   });
