@@ -84,7 +84,7 @@ router.get('/', async (req, res, next) => {
     if (adList.length === 0) {
       res.status(404).json({ error: 'Ad not found, try with another query' });
     } else {
-      res.send({ results: adList });
+      res.send({ adList });
       // res.render('adList', adList);
     }
     module.exports = adList;
@@ -122,6 +122,7 @@ router.post('/', async (req, res, next) => {
   console.log('BODY', req.body);
   const adData = req.body;
   const image = req.file;
+  console.log(image);
   const adName = req.body.adName || req.body.name;
 
 
@@ -140,18 +141,20 @@ router.post('/', async (req, res, next) => {
     try {
       console.log(result);
       adData.thumbnail = result;
+      adData.photo = req.body.photo.objectURL;
       const newAd = new Ad(adData);
       await newAd.save();
+      res.header('Access-Control-Allow-Origin', '*');
+
+      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+      res.status(201).json({ result: 'Ad created successfully', status: 201 });
 
     } catch (error) {
       next(error);
     }
   });
-  res.header('Access-Control-Allow-Origin', '*');
 
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-
-  res.status(201).json({ result: 'Ad created successfully', status: 201 });
 });
 
 router.put('/:id', async (req, res, next) => {

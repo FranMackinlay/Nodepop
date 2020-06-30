@@ -36,14 +36,15 @@ app.locals.title = 'Nodepop';
   * API Routes
 */
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.header('Access-Control-Allow-Origin', '*');
   next();
 });
 
 app.use('/api/ads', upload.single('thumbnail'), jwtAuth(), require('./routes/api/ads'));
+// app.use('/api/ads', jwtAuth(), require('./routes/api/ads'));
 app.use('/api/authenticate', require('./routes/api/authenticate'));
 
 /*
