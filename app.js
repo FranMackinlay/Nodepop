@@ -4,7 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({
+  dest: 'uploads/',
+  limits: { fieldSize: 1024 * 1024 * 1024 }
+});
 const jwtAuth = require('./lib/jwtAuth');
 const i18n = require('./lib/i18n-configure')();
 
@@ -15,6 +18,13 @@ require('./lib/connectMongoose');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', ['http://localhost:3001']);
+  res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
@@ -35,15 +45,9 @@ app.locals.title = 'Nodepop';
 /*
   * API Routes
 */
-app.use((req, res, next) => {
-  res.append('Access-Control-Allow-Origin', ['*']);
-  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.append('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+
 
 app.use('/api/ads', upload.single('thumbnail'), jwtAuth(), require('./routes/api/ads'));
-// app.use('/api/ads', jwtAuth(), require('./routes/api/ads'));
 app.use('/api/authenticate', require('./routes/api/authenticate'));
 
 /*

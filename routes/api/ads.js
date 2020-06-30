@@ -119,43 +119,16 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-  console.log('BODY', req.body);
   const adData = req.body;
-  const image = req.file;
-  console.log(image);
-  const adName = req.body.adName || req.body.name;
 
+  const newAd = new Ad(adData);
+  await newAd.save();
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
+  res.setHeader('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
 
-  const thumbnailName = `${adName.replace(/ /g, '').replace(/'/g, '')}-thumbnail.jpg`
-  const thumbnailRoute = `${__dirname}/thumbnails/${thumbnailName}`;
-
-  jimp.read(image?.path, (err, photo) => {
-    if (err) throw err;
-    photo.resize(100, 100).quality(60).write(thumbnailRoute);
-  });
-
-  requester.send({
-    type: 'save-thumbnail',
-    itemToSave: thumbnailRoute,
-  }, async result => {
-    try {
-      console.log(result);
-      adData.thumbnail = result;
-      adData.photo = req.body.photo.objectURL;
-      const newAd = new Ad(adData);
-      await newAd.save();
-      res.append('Access-Control-Allow-Origin', '*');
-      res.append('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-      res.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-      res.append('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-
-      res.status(201).json({ result: 'Ad created successfully', status: 201 });
-
-    } catch (error) {
-      next(error);
-    }
-  });
-
+  res.status(201).json({ result: 'Ad created successfully', status: 201, ad: newAd });
 });
 
 router.put('/:id', async (req, res, next) => {
