@@ -144,9 +144,10 @@ router.post('/', async (req, res, next) => {
       adData.photo = req.body.photo.objectURL;
       const newAd = new Ad(adData);
       await newAd.save();
-      res.header('Access-Control-Allow-Origin', '*');
-
-      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+      res.append('Access-Control-Allow-Origin', '*');
+      res.append('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+      res.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+      res.append('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
 
       res.status(201).json({ result: 'Ad created successfully', status: 201 });
 
