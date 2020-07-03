@@ -6,6 +6,7 @@ const adSchema = mongoose.Schema({
   sale: Boolean,
   price: Number,
   photo: String,
+  description: String,
   tags: [String],
   thumbnail: String,
 });
