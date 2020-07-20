@@ -20,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', ['http://localhost:3001']);
+  res.setHeader('Access-Control-Allow-Origin', ['*']);
   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
