@@ -82,10 +82,10 @@ router.get('/', async (req, res, next) => {
 
     res.locals.adList = adList;
 
-    res.setHeader('Access-Control-Allow-Origin', 'http://3.19.218.251/');
-    res.setHeader('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method, append, delete, entries,f oreach, get, has, keys, set, values');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://3.19.218.251/');
+    // res.setHeader('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    // res.setHeader('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method, append, delete, entries,f oreach, get, has, keys, set, values');
 
     if (adList.length === 0) {
       res.status(404).json({ error: 'Ad not found, try with another query' });
@@ -105,10 +105,10 @@ router.get('/:id', async (req, res, next) => {
 
     const ad = await Ad.findOne({ _id });
 
-    res.setHeader('Access-Control-Allow-Origin', 'http://3.19.218.251/');
-    res.setHeader('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method, append, delete, entries,f oreach, get, has, keys, set, values');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://3.19.218.251/');
+    // res.setHeader('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    // res.setHeader('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method, append, delete, entries,f oreach, get, has, keys, set, values');
 
     if (!ad) {
       res.status(404).json({ result: 'Ad not found' });
