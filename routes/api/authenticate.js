@@ -27,7 +27,7 @@ router.post('/', async (req, res, next) => {
       expiresIn: '3d',
     });
 
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', 'http://3.19.218.251/');
 
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 
