@@ -133,7 +133,7 @@ router.put('/:id', async (req, res, next) => {
       useFindAndModify: false,
     });
 
-    res.setHeader('Access-Control-Allow-Origin', ['*']);
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method, append, delete, entries,f oreach, get, has, keys, set, values');
