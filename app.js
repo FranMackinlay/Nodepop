@@ -21,7 +21,7 @@ app.set('view engine', 'ejs');
 
 // app.use((req, res, next) => {
 //   res.setHeader('Access-Control-Allow-Origin', 'http://3.19.218.251/');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 //   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 //   next();
 // });
