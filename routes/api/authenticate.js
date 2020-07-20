@@ -11,10 +11,14 @@ router.post('/', async (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
 
+    console.log(email, password);
+
     const findUser = await User.findOne({ email });
 
     if (!findUser || !await bcrypt.compare(password, findUser.password)) {
-      const error = new Error({ error: true, message: 'Invalid Credentials' });
+      let error = new Error();
+      error.error = true;
+      error.message = 'Invalid Credentials';
       error.status = 401;
       return next(error);
     }
@@ -27,7 +31,7 @@ router.post('/', async (req, res, next) => {
 
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 
-    res.json({ token });
+    res.json({ token, findUser });
 
   } catch (error) {
     next(error);

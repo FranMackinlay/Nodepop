@@ -79,6 +79,13 @@ router.get('/', async (req, res, next) => {
 
     const adList = await Ad.list(filter, limit, skip, sort);
 
+    if (req.query.email && adList.length !== 0) {
+      const userAds = adList.filter(ad => {
+        return ad.author === req.query.email;
+      });
+      return res.send({ userAds });
+    }
+
     res.locals.adList = adList;
 
     if (adList.length === 0) {

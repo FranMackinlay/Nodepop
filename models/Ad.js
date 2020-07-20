@@ -9,6 +9,7 @@ const adSchema = mongoose.Schema({
   description: String,
   tags: [String],
   thumbnail: String,
+  author: String,
 });
 
 // eslint-disable-next-line func-names
