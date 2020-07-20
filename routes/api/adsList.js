@@ -1,13 +1,7 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable radix */
-/* eslint-disable no-underscore-dangle */
 
 const express = require('express');
 const router = express.Router();
 const Ad = require('../../models/Ad');
-const cote = require('cote');
-const requester = new cote.Requester({ name: 'create thumbnail' });
-const jimp = require('jimp');
 
 
 router.get('/', async (req, res, next) => {
@@ -61,6 +55,7 @@ router.get('/', async (req, res, next) => {
 
     //* Validate sale filter
     const isSale = req.query.sale;
+    console.log('ISSALE', isSale);
     switch (isSale) {
       case 'buy':
         filter.sale = false;
@@ -99,66 +94,21 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/tags', async (req, res, next) => {
-  try {
-    const tagsArray = await Ad.getTags();
-    res.json(tagsArray);
-  } catch (err) {
-    next(err);
-  }
-});
-
-
-router.post('/', async (req, res, next) => {
-  const adData = req.body;
-
-  const newAd = new Ad(adData);
-  await newAd.save();
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
-  res.setHeader('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-
-  res.status(201).json({ result: 'Ad created successfully', status: 201, ad: newAd });
-});
-
-router.put('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const _id = req.params.id;
 
-    const adUpdate = req.body;
+    const ad = await Ad.findOne({ _id });
 
-    const updatedAd = await Ad.findOneAndUpdate({ _id }, adUpdate, {
-      new: true,
-      useFindAndModify: false,
-    });
+    if (!ad) {
+      res.status(404).json({ result: 'Ad not found' });
+    }
 
-    res.setHeader('Access-Control-Allow-Origin', ['http://localhost:3001']);
-    res.setHeader('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method, append, delete, entries,f oreach, get, has, keys, set, values');
-    res.status(200);
-    res.json({ result: updatedAd, status: 'ok' });
+    res.json({ result: ad });
   } catch (err) {
     next(err);
   }
 });
 
-router.delete('/:id', async (req, res, next) => {
-  try {
-    const _id = req.params.id;
-
-    await Ad.deleteOne({ _id });
-
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
-    res.setHeader('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-
-    res.json({ result: 'success' });
-  } catch (err) {
-    next(err);
-  }
-});
 
 module.exports = router;

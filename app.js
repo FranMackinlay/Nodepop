@@ -46,7 +46,7 @@ app.locals.title = 'Nodepop';
   * API Routes
 */
 
-
+app.use('/api/adsList', require('./routes/api/adsList'));
 app.use('/api/ads', upload.single('thumbnail'), jwtAuth(), require('./routes/api/ads'));
 app.use('/api/authenticate', require('./routes/api/authenticate'));
 app.use('/api/users', require('./routes/api/users'));
