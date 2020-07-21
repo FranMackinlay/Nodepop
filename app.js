@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -19,12 +20,14 @@ require('./lib/connectMongoose');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://3.19.218.251/');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  //   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', 'http://3.19.218.251/');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//   //   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+//   next();
+// });
+
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
