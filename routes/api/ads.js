@@ -114,10 +114,6 @@ router.post('/', async (req, res, next) => {
 
   const newAd = new Ad(adData);
   await newAd.save();
-  // res.setHeader('Access-Control-Allow-Origin', 'http://3.19.218.251/');
-  // res.setHeader('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-  // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  // res.setHeader('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
 
   res.status(201).json({ result: 'Ad created successfully', status: 201, ad: newAd });
 });
@@ -133,10 +129,6 @@ router.put('/:id', async (req, res, next) => {
       useFindAndModify: false,
     });
 
-    // res.setHeader('Access-Control-Allow-Origin', 'http://3.19.218.251/');
-    // res.setHeader('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    // res.setHeader('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method, append, delete, entries,f oreach, get, has, keys, set, values');
     res.status(200);
     res.json({ result: updatedAd, status: 'ok' });
   } catch (err) {
@@ -150,10 +142,6 @@ router.delete('/:id', async (req, res, next) => {
 
     await Ad.deleteOne({ _id });
 
-    // res.setHeader('Access-Control-Allow-Origin', 'http://3.19.218.251/');
-    // res.setHeader('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    // res.setHeader('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
 
     res.json({ result: 'success' });
   } catch (err) {

@@ -20,14 +20,11 @@ require('./lib/connectMongoose');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', 'http://3.19.218.251/');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//   //   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-//   next();
-// });
+const corsOptions = {
+  origin: 'http://3.19.218.251',
+  optionsSuccessStatus: 200
+}
 
-app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
@@ -49,10 +46,10 @@ app.locals.title = 'Nodepop';
   * API Routes
 */
 
-app.use('/api/adsList', require('./routes/api/adsList'));
-app.use('/api/ads', upload.single('thumbnail'), jwtAuth(), require('./routes/api/ads'));
-app.use('/api/authenticate', require('./routes/api/authenticate'));
-app.use('/api/users', require('./routes/api/users'));
+app.use('/api/adsList', cors(corsOptions), require('./routes/api/adsList'));
+app.use('/api/ads', cors(corsOptions), upload.single('thumbnail'), jwtAuth(), require('./routes/api/ads'));
+app.use('/api/authenticate', cors(corsOptions), require('./routes/api/authenticate'));
+app.use('/api/users', cors(corsOptions), require('./routes/api/users'));
 
 /*
   * Website routes
