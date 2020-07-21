@@ -1,6 +1,5 @@
 const createError = require('http-errors');
 const express = require('express');
-const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -20,16 +19,6 @@ require('./lib/connectMongoose');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-const whitelist = ['http://3.19.218.251', '*'];
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
 
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -52,10 +41,10 @@ app.locals.title = 'Nodepop';
   * API Routes
 */
 
-app.use('/api/adsList', cors(corsOptions), require('./routes/api/adsList'));
-app.use('/api/ads', cors(corsOptions), upload.single('thumbnail'), jwtAuth(), require('./routes/api/ads'));
-app.use('/api/authenticate', cors(corsOptions), require('./routes/api/authenticate'));
-app.use('/api/users', cors(corsOptions), require('./routes/api/users'));
+app.use('/api/adsList', require('./routes/api/adsList'));
+app.use('/api/ads', upload.single('thumbnail'), jwtAuth(), require('./routes/api/ads'));
+app.use('/api/authenticate', require('./routes/api/authenticate'));
+app.use('/api/users', require('./routes/api/users'));
 
 /*
   * Website routes
