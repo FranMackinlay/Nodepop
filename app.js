@@ -20,9 +20,15 @@ require('./lib/connectMongoose');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+const whitelist = ['http://3.19.218.251', '*'];
 const corsOptions = {
-  origin: 'http://3.19.218.251',
-  optionsSuccessStatus: 200
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
 }
 
 
