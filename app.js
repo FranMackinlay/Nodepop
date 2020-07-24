@@ -1,6 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const multer = require('multer');
@@ -12,6 +13,7 @@ const jwtAuth = require('./lib/jwtAuth');
 const i18n = require('./lib/i18n-configure')();
 
 const app = express();
+
 
 require('./lib/connectMongoose');
 
@@ -41,6 +43,13 @@ app.locals.title = 'Nodepop';
   * API Routes
 */
 
+app.use((req, res, next) => {
+  res.append('Access-Control-Allow-Origin', ['*']);
+  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.append('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 app.use('/api/adsList', require('./routes/api/adsList'));
 app.use('/api/ads', upload.single('thumbnail'), jwtAuth(), require('./routes/api/ads'));
 app.use('/api/authenticate', require('./routes/api/authenticate'));
@@ -64,6 +73,10 @@ app.use(function (req, res, next) {
 const isApiRequest = req => {
   return req.originalUrl.startsWith('/api/');
 };
+
+// app.listen(80, function () {
+//   console.log('CORS-enabled web server listening on port 80')
+// })
 
 //! error handler
 app.use(function (err, req, res, next) {
